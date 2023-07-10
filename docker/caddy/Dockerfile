@@ -1,0 +1,1 @@
+FROM caddy/caddy:2-alpine

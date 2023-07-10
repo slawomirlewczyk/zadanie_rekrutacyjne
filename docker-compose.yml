@@ -1,0 +1,70 @@
+version: "3.8"
+services:
+  web:
+    build: ./docker/php
+    container_name: proassist_web
+    networks:
+      proassist:
+    links:
+      - mysql:mysql
+    depends_on:
+      - mysql
+    volumes:
+      - ./symfony_api:/var/www/html:delegated
+
+  mysql:
+    build: ./docker/mysql
+    container_name: proassist_mysql
+    networks:
+      proassist:
+    volumes:
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=symfony
+      - MYSQL_DATABASE=symfony
+      - MYSQL_USER=symfony
+      - MYSQL_PASSWORD=symfony
+
+  phpmyadmin:
+    build: ./docker/phpmyadmin
+    container_name: proassist_phpmyadmin
+    networks:
+      proassist:
+    links:
+      - mysql:mysql
+    depends_on:
+      - mysql
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=symfony
+      - UPLOAD_LIMIT=512M
+  
+  react:
+    build: ./docker/react
+    container_name: proassist_react
+    networks:
+      proassist:
+    volumes:
+      - ./react_app:/app
+
+  reverse_proxy:
+    build:
+      context: docker/caddy
+    container_name: proassist_reverse-proxy
+    networks:
+      proassist:
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  proassist:

@@ -1,0 +1,12 @@
+http://dev.login.localhost {
+	reverse_proxy web:80
+}
+http://pma.login.localhost {
+	reverse_proxy phpmyadmin:80
+}
+http://mysql.login.localhost {
+	reverse_proxy mysql:80
+}
+http://react.login.localhost {
+	reverse_proxy react:3000
+}
