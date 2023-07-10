@@ -1,0 +1,16 @@
+How to run (after git clone):
+  1. cd react_app
+  2. yarn install
+  3. cd ../symfony_api
+  4. composer update
+  5. cd ..
+  6. docker compose up -d --build
+
+URL:
+  Frontend: http://react.login.localhost
+  Backend: http://symfony.login.localhost
+  PMA: http://pma.login.localhost
+
+Test user:
+  email: admin@gmail.com
+  password: admin
