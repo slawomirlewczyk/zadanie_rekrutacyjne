@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 async function loginUser(credentials) {
-  return fetch('http://dev.login.localhost/api/login', {
+  return fetch('http://symfony.login.localhost/api/login', {
     method: 'POST',
     headers: {
       'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'

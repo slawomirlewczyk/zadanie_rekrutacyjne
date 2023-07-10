@@ -21,7 +21,7 @@ const Items = () => {
   const classes = useStyles();
 
   useEffect(() => {
-    fetch('http://dev.login.localhost/api/items')
+    fetch('http://symfony.login.localhost/api/items')
       .then(response => response.json())
       .then(data => {
         setItems(data);

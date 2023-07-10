@@ -1,4 +1,4 @@
-http://dev.login.localhost {
+http://symfony.login.localhost {
 	reverse_proxy web:80
 }
 http://pma.login.localhost {
